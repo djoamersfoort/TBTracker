@@ -2,7 +2,7 @@
 #include <RadioLib.h>
 
 // Change 'SX1278' in the line below to 'SX1276' if you have a SX1276 module.
-SX1278 radio = new Module(PIN_NSS, PIN_DIO0, PIN_DIO1);
+SX1262 radio = new Module(10, 2, 4, 3);
 
 // create RTTY client instance using the radio module
 RTTYClient rtty(&radio);
@@ -34,7 +34,7 @@ void SetupRTTY()
     Serial.print(F("failed, code "));
     Serial.println(state);
 #endif
-    while(true);
+
   }
 }
 
@@ -51,13 +51,7 @@ void SetupFSK()
 
  // int16_t state = radio.beginFSK();
  
-  int16_t state = radio.beginFSK(FSKSettings.Frequency,
-                               FSKSettings.BitRate,
-                               FSKSettings.FreqDev,
-                               FSKSettings.RXBandwidth,
-                               FSKSettings.Power,
-                               FSKSettings.PreambleLength,
-                               FSKSettings.EnableOOK);
+  int16_t state = radio.beginFSK();
 
 
   if(state == ERR_NONE) 
@@ -72,7 +66,7 @@ void SetupFSK()
     Serial.print(F("failed, code "));
     Serial.println(state);
 #endif
-    while(true);
+
   }
 }
 
@@ -119,18 +113,7 @@ void SetupLoRa()
       break;   
   }
   
-  int16_t state = radio.begin
-  (
-    LoRaSettings.Frequency,
-    LoRaSettings.Bandwidth,
-    LoRaSettings.SpreadFactor,
-    LoRaSettings.CodeRate,
-    LoRaSettings.SyncWord,
-    LoRaSettings.Power,
-    LoRaSettings.PreambleLength, 
-    LoRaSettings.Gain
-  );
-  
+  int16_t state = radio.begin(LoRaSettings.Frequency);
   if(state == ERR_NONE) 
   {
 #if defined(DEVMODE)    
@@ -143,7 +126,7 @@ void SetupLoRa()
     Serial.print(F("failed, code "));
     Serial.println(state);
 #endif    
-    while(true);
+
   }
 }
 

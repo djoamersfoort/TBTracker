@@ -1,6 +1,20 @@
 #include <SoftwareSerial.h>
 #include "Settings.h"
+#include <DallasTemperature.h>
 
+// Data wire is plugged into port 2 on the Arduino
+#define ONE_WIRE_BUS 9
+#define TEMPERATURE_PRECISION 12 // Lower resolution
+
+// Setup a oneWire instance to communicate with any OneWire devices (not just Maxim/Dallas temperature ICs)
+OneWire oneWire(ONE_WIRE_BUS);
+
+// Pass our oneWire reference to Dallas Temperature.
+DallasTemperature sensors(&oneWire);
+
+int numberOfDevices; // Number of temperature devices found
+
+DeviceAddress tempDeviceAddress; // We'll use this variable to store a found device address
 /***********************************************************************************
  *  FIRST THING YOU NEED TO DO IS ADJUST THE SETTINGS IN Settings.h
  *  
@@ -118,8 +132,11 @@ volatile int sleepIterations = 0;
 //============================================================================
 void setup()
 {
+  
   // Setup Serial for debugging
   Serial.begin(9600);
+  setup2();
+
   // Setup the Ublox GPS
   SerialGPS.begin(GPSBaud);  //TX, RX
 
@@ -171,7 +188,6 @@ void loop()
 
        // Delay in milliseconds between rtty and lora. You can change this
        delay(1000);
-     
        // Send LoRa 
        if (LORA_ENABLED)
        { 
@@ -208,4 +224,5 @@ void loop()
     }
     watchdogActivated = true; 
   }
+  
 }

@@ -29,12 +29,12 @@
 * Change when needed
 ************************************************************************************/
 #define RTTY_ENABLED true            // Set to true if you want RTTY transmissions (You can use Both LoRa and RTTY or only one of the two) 
-#define RTTY_PAYLOAD_ID  "RTTY_ID"   // Payload ID for RTTY protocol
-#define RTTY_FREQUENCY  434.113      // Can be different from LoRa frequency
-#define RTTY_SHIFT 610
-#define RTTY_BAUD 150                // Baud rate
+#define RTTY_PAYLOAD_ID  "DJOAMF-RTTY"   // Payload ID for RTTY protocol
+#define RTTY_FREQUENCY  434.5      // Can be different from LoRa frequency
+#define RTTY_SHIFT 425
+#define RTTY_BAUD 100                // Baud rate
 #define RTTY_STOPBITS 2
-#define RTTY_PREFIX "$$$$$"          
+#define RTTY_PREFIX "$$$$$$$$$$"          
  
 // RTTY encoding modes (leave this unchanged)
 #define RTTY_ASCII 0                 // 7 data bits 
@@ -47,7 +47,7 @@
 // Idle carrier in ms before sending actual RTTY string. 
 // Set to a low value (i.e. 1000 or lower) if you have a very frequency stable signal
 // Set to a high value (i.e. 5000 or even higher) if you have a hard time to tune the signal
-#define RTTY_IDLE_TIME 2500          
+#define RTTY_IDLE_TIME 2000          
  
 /***********************************************************************************
 * LORA SETTINGS
@@ -55,14 +55,14 @@
 * Change when needed
 ************************************************************************************/
 #define LORA_ENABLED true            // Set to true if you want LoRa transmissions (You can use Both LoRa and RTTY or only one of the two)
-#define LORA_PAYLOAD_ID  "LORA-ID"   // Payload ID for LoRa protocol
-#define LORA_FREQUENCY  434.562      // Can be different from RTTY frequency
+#define LORA_PAYLOAD_ID  "DJOAMF-LORA"   // Payload ID for LoRa protocol
+#define LORA_FREQUENCY  434.5      // Can be different from RTTY frequency
 #define LORA_BANDWIDTH 125.0
 #define LORA_SPREADFACTOR 9
 #define LORA_CODERATE 7
 #define LORA_PREFIX "$$"             // Some older LoRa software does not accept a prefix of more than 2x "$"
-#define LORA_SYNCWORD 0x12           // for sx1278
-// #define LORA_SYNCWORD 0x1424      // for sx1262 (currently not supported)
+//#define LORA_SYNCWORD 0x12           // for sx1278
+#define LORA_SYNCWORD 0x1424      // for sx1262 (currently not supported)
 #define LORA_POWER 10                // in dBm between 2 and 17. 10 = 10mW (recommended)
 #define LORA_CURRENTLIMIT 100
 #define LORA_PREAMBLELENGTH 8
@@ -89,9 +89,9 @@
 // Currently deep sleep is only enabled for ATMEGA328
 #define USE_DEEP_SLEEP true     // Put the ATMEGA328 chip to deep sleep while not transmitting. set to true or false.
                                 // The tracker will only go to sleep if there are more than 4 satellites visible   
-#define TIME_TO_SLEEP  15       // This is the number in seconds out of TX_LOOP_TIME that the CPU is in sleep. Only valid when USE_DEEP_SLEEP = true
+#define TIME_TO_SLEEP  0       // This is the number in seconds out of TX_LOOP_TIME that the CPU is in sleep. Only valid when USE_DEEP_SLEEP = true
 
-#define TX_LOOP_TIME   30       // When USE_DEEP_SLEEP=false: Number in seconds between transmits
+#define TX_LOOP_TIME   0       // When USE_DEEP_SLEEP=false: Number in seconds between transmits
                                 // When USE_DEEP_SLEEP=true : Time between transmits is TIME_TO_SLEEP+TX_LOOP_TIME+time it takes to transmit the data
 
 // Define up to 5 pins to power sensors from (for example your GPS). Each Arduino pin can source up to 40mA. All together, the pins can source 150-200 mA
@@ -99,8 +99,8 @@
 // This will only work when USE_DEEP_SLEEP=true and there is a valid GPS lock.
 // Comment out the pins you use for your sensors or leds. 
 // Set pin value to a valid value.
-#define POWER_PIN1     3
-#define POWER_PIN2     4
+// #define POWER_PIN1     3
+// #define POWER_PIN2     4
 // #define POWER_PIN3     -1
 // #define POWER_PIN4     -1
 // #define POWER_PIN5     -1
