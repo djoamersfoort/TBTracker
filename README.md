@@ -1,6 +1,8 @@
+# Warning
+Warning, this has been customized with our callsign and a new sensor, please the version on the repo we forked from
 # TBTracker
 RTTY and LoRa High Altitude Balloon Tracker for Arduino and SX127x (or Hope RFM9x).
-
+WARNING, this has been customized with our callsign and a new sensor, please the version on the repo we forked from
 TBTracker is a sketch for a tracker for high altitude weather balloons. It will send telemetry data in RTTY and LoRa format.
 It is designed to send telemetry data in the correct format for https://tracker.habhub.org/
 
